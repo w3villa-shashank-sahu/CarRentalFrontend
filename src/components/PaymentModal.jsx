@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { apiUrl } from '../utils/const';
 
 function PaymentModal({ rental, onClose, onSuccess }) {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -30,7 +31,7 @@ function PaymentModal({ rental, onClose, onSuccess }) {
         amount
       });
       
-      await axios.post('http://localhost:5000/api/rentals/return', {
+      await axios.post(apiUrl + 'api/rentals/return', {
         rentalId: rental.id,
         returnDate: returnDate,
         totalPrice: amount

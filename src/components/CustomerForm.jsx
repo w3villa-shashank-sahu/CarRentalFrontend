@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { apiUrl } from '../utils/const'
 
 const CustomerForm = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const CustomerForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:5000/api/customers', formData)
+      await axios.post( apiUrl + 'api/customers', formData)
       setFormData({ name: '', email: '', phone: '' })
       alert('Customer added successfully!')
       window.location.reload()

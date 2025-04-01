@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { apiUrl } from '../utils/const'
 
 const RentalForm = () => {
   const [formData, setFormData] = useState({
     customer_id: '',
     car_id: '',
     rental_date: new Date().toISOString().split('T')[0],
-    // return_date: '',
-    // total_price: ''
   })
   const [customers, setCustomers] = useState([])
   const [cars, setCars] = useState([])
@@ -19,7 +18,7 @@ const RentalForm = () => {
 
   const fetchCustomers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/customers')
+      const response = await axios.get( apiUrl + 'api/customers')
       setCustomers(response.data)
     } catch (error) {
       console.error('Error fetching customers:', error)
@@ -28,7 +27,7 @@ const RentalForm = () => {
 
   const fetchAvailableCars = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/cars')
+      const response = await axios.get( apiUrl + 'api/cars')
       setCars(response.data)
     } catch (error) {
       console.error('Error fetching cars:', error)
@@ -45,7 +44,7 @@ const RentalForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:5000/api/rentals', formData)
+      await axios.post(apiUrl + 'api/rentals', formData)
       setFormData({
         customer_id: '',
         car_id: '',
@@ -108,30 +107,6 @@ const RentalForm = () => {
             required
           />
         </div>
-        {/* <div className="form-group">
-          <label htmlFor="return_date">Return Date:</label>
-          <input
-            type="date"
-            id="return_date"
-            name="return_date"
-            value={formData.return_date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="total_price">Total Price:</label>
-          <input
-            type="number"
-            id="total_price"
-            name="total_price"
-            value={formData.total_price}
-            onChange={handleChange}
-            required
-            min="0"
-            step="0.01"
-          />
-        </div> */}
         <button type="submit">Create Rental</button>
       </form>
     </>

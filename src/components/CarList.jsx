@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {apiUrl} from '../utils/const'
 import axios from 'axios'
 
 const CarList = () => {
@@ -12,7 +13,7 @@ const CarList = () => {
 
   const fetchCars = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/cars')
+      const response = await axios.get(apiUrl + 'api/cars')
       setCars(response.data)
       setLoading(false)
     } catch (err) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PaymentModal from './PaymentModal'
+import { apiUrl } from '../utils/const'
 
 const ActiveRentals = () => {
   const [activeRentals, setActiveRentals] = useState([])
@@ -14,7 +15,7 @@ const ActiveRentals = () => {
 
   const fetchActiveRentals = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/rentals/active')
+      const response = await axios.get(apiUrl + 'api/rentals/active')
       console.log(response.data);
       setActiveRentals(response.data)
       setLoading(false)

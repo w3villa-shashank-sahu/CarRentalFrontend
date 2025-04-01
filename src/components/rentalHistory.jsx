@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { apiUrl } from '../utils/const';
 
 const RentalHistory = () => {
   const [rentals, setRentals] = useState([]);
@@ -12,7 +13,7 @@ const RentalHistory = () => {
 
   const fetchRentalHistory = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/rentals/history');
+      const response = await axios.get(apiUrl + 'api/rentals/history');
       console.log('response', response.data);
       
       setRentals(response.data);
